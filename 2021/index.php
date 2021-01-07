@@ -4,11 +4,12 @@
 		$conn = mysqli_connect($db, $username, $password, $db_name);
 
 		if (!$conn) exit("Connection failed, please contact a faciltator. Error message:<br><br><pre>" . mysqli_connect_error());
-		$query = "SELECT `id` FROM `users` WHERE `username`='{$_POST['username']}' AND `password`='{$_POST['password']}'";
+		$password_hash = md5($_POST['password']);
+		$query = "SELECT `id` FROM `users` WHERE `username`='{$_POST['username']}' AND `password`='{$password_hash}'";
 		$sql_result = mysqli_query($conn, $query);
 
-
 		if (mysqli_num_rows($sql_result) > 0) {
+			// User with matching username and password found
 			session_start();
 			$_SESSION['username'] = $_POST['username'];
 			$_SESSION['password'] = $_POST['password'];

